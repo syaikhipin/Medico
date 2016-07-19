@@ -1,0 +1,109 @@
+<?php $__env->startSection('content'); ?>
+<div class="page-content row">
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-title">
+        <h3> <?php echo e($pageTitle); ?> <small><?php echo e($pageNote); ?></small></h3>
+      </div>
+      <ul class="breadcrumb">
+        <li><a href="<?php echo e(URL::to('dashboard')); ?>"><?php echo e(Lang::get('core.home')); ?></a></li>
+		<li><a href="<?php echo e(URL::to('prescription?return='.$return)); ?>"><?php echo e($pageTitle); ?></a></li>
+        <li class="active"> <?php echo e(Lang::get('core.detail')); ?> </li>
+      </ul>
+	 </div>  
+	 
+	 
+ 	<div class="page-content-wrapper">   
+	   <div class="toolbar-line">
+	   		<a href="<?php echo e(URL::to('prescription?return='.$return)); ?>" class="tips btn btn-xs btn-default" title="<?php echo e(Lang::get('core.btn_back')); ?>"><i class="fa fa-arrow-circle-left"></i>&nbsp;<?php echo e(Lang::get('core.btn_back')); ?></a>
+			<?php if($access['is_add'] ==1): ?>
+	   		<a href="<?php echo e(URL::to('prescription/update/'.$id.'?return='.$return)); ?>" class="tips btn btn-xs btn-primary" title="<?php echo e(Lang::get('core.btn_edit')); ?>"><i class="fa fa-edit"></i>&nbsp;<?php echo e(Lang::get('core.btn_edit')); ?></a>
+			<?php endif; ?>  		   	  
+		</div>
+<div class="sbox animated fadeInRight">
+	<div class="sbox-title"> <h4> <i class="fa fa-table"></i> </h4></div>
+	<div class="sbox-content"> 	
+
+
+	
+	<table class="table table-striped table-bordered" >
+		<tbody>	
+	
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('Patient', (isset($fields['PatientID']['language'])? $fields['PatientID']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo SiteHelpers::gridDisplayView($row->PatientID,'PatientID','1:tb_patient:PatientID:first_name|last_name'); ?> </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('Appointment', (isset($fields['AppointmentID']['language'])? $fields['AppointmentID']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo SiteHelpers::gridDisplayView($row->AppointmentID,'AppointmentID','1:tb_appointment:AppointmentID:StartAt'); ?> </td>
+						
+					</tr>
+				
+		</tbody>	
+	</table>   
+
+	 	
+	<?php if($subgrid['access']['is_detail'] == '1'): ?>	
+		<hr />	
+		<h5> Prescription Detail </h5>
+	
+		<div class="table-responsive">
+	    <table class="table table-striped ">
+	        <thead>
+				<tr>
+					<th class="number"> No </th>
+						<?php foreach($subgrid['tableGrid'] as $t): ?>
+						<?php if($t['view'] =='1'): ?>
+							<th>
+								<?php echo e(SiteHelpers::activeLang($t['label'],(isset($t['language'])? $t['language'] : array()))); ?>
+
+							</th>
+						<?php endif; ?>
+					<?php endforeach; ?>
+					
+				  </tr>
+	        </thead>
+
+	        <tbody>
+	            <?php foreach($subgrid['rowData'] as $row): ?>
+	            <tr>
+					<td width="30">  </td>		
+				 <?php foreach($subgrid['tableGrid'] as $field): ?>
+					 <?php if($field['view'] =='1' ): ?>
+					 <td>					 
+					 	<?php if($field['attribute']['image']['active'] =='1'): ?>
+							<?php echo SiteHelpers::showUploadedFile($row->$field['field'],$field['attribute']['image']['path']); ?>
+
+						<?php else: ?>	
+							<?php /**/ $conn = (isset($field['conn']) ? $field['conn'] : array() ) /**/ ?>
+							<?php echo SiteHelpers::gridDisplay($row->$field['field'],$field['field'],$conn); ?>	
+						<?php endif; ?>						 
+					 </td>
+					 <?php endif; ?>					 
+				 
+				 <?php endforeach; ?>
+				<?php endforeach; ?>
+				</tr> 
+
+
+	        </tbody>	
+
+	     </table>   
+	     </div>
+	<?php endif; ?>
+     
+	
+	</div>
+</div>	
+
+	</div>
+</div>
+	  
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

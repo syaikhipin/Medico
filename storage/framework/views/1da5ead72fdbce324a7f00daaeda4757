@@ -1,0 +1,104 @@
+<?php $__env->startSection('content'); ?>
+<div class="sbox">
+	<div class="sbox-title">
+			
+				<h3 ><?php echo e(CNF_APPNAME); ?></h3>
+				
+	</div>
+	<div class="sbox-content">
+	<div class="text-center   fadeInDown delayp1">
+		<?php if(file_exists(public_path().'/sximo/images/'.CNF_FRONT_LOGO) && CNF_FRONT_LOGO !=''): ?>
+			<img src="<?php echo e(asset('sximo/images/'.CNF_FRONT_LOGO)); ?>" alt="<?php echo e(CNF_APPNAME); ?>" width="70" height="70" />
+		<?php else: ?>
+			<img src="<?php echo e(asset('sximo/images/logo.svg')); ?>" alt="<?php echo e(CNF_APPNAME); ?>" width="70" height="70" />
+		<?php endif; ?>
+	</div>		
+ <?php echo Form::open(array('url'=>'user/create', 'class'=>'form-signup')); ?>
+
+	    	<?php if(Session::has('message')): ?>
+				<?php echo Session::get('message'); ?>
+
+			<?php endif; ?>
+		<ul class="parsley-error-list">
+			<?php foreach($errors->all() as $error): ?>
+				<li><?php echo e($error); ?></li>
+			<?php endforeach; ?>
+		</ul>
+		<ul class="nav nav-tabs" >
+			<li ><a href="<?php echo e(url('user/login')); ?>" >  <?php echo e(Lang::get('core.signin')); ?> </a></li>
+			<?php /*<li ><a href="<?php echo e(url('user/login#tab-forgot')); ?>"> <?php echo e(Lang::get('core.forgotpassword')); ?> </a></li>*/ ?>
+			<?php if(CNF_REGIST =='true'): ?>
+				<li class="active"><a href="" >  <?php echo e(Lang::get('core.signup')); ?> </a></li>
+			<?php endif; ?>
+
+		</ul>
+
+		<div class="form-group has-feedback">
+		<label><?php echo e(Lang::get('core.firstname')); ?>	 </label>
+	  <?php echo Form::text('firstname', null, array('class'=>'form-control', 'placeholder'=>'First Name' ,'required'=>'' )); ?>
+
+		<i class="icon-users form-control-feedback"></i>
+	</div>
+	
+	<div class="form-group has-feedback">
+		<label><?php echo e(Lang::get('core.lastname')); ?>	 </label>
+	 <?php echo Form::text('lastname', null, array('class'=>'form-control', 'placeholder'=>'Last Name','required'=>'')); ?>
+
+		<i class="icon-users form-control-feedback"></i>
+	</div>
+	
+	<div class="form-group has-feedback">
+		<label><?php echo e(Lang::get('core.email')); ?>	 </label>
+	 <?php echo Form::text('email', null, array('class'=>'form-control', 'placeholder'=>'Email Address','required'=>'email')); ?>
+
+		<i class="icon-envelop form-control-feedback"></i>
+	</div>
+	
+	<div class="form-group has-feedback">
+		<label><?php echo e(Lang::get('core.password')); ?>	</label>
+	 <?php echo Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password','required'=>'')); ?>
+
+		<i class="icon-lock form-control-feedback"></i>
+	</div>
+	
+	<div class="form-group has-feedback">
+		<label><?php echo e(Lang::get('core.repassword')); ?>	</label>
+	 <?php echo Form::password('password_confirmation', array('class'=>'form-control', 'placeholder'=>'Confirm Password','required'=>'')); ?>
+
+		<i class="icon-lock form-control-feedback"></i>
+	</div>
+
+	<div class="form-group has-feedback">
+			<label> Doctor/User</label>
+			<select name="type" id="type" class="form-control">
+				<option>--Please Select--</option>
+				<option value="3">Doctor</option>
+				<option value="5">User</option>
+			</select>
+	</div>
+    <?php if(CNF_RECAPTCHA =='true'): ?> 
+    <div class="form-group has-feedback  animated fadeInLeft delayp1">
+        <label class="text-left"> Are u human ? </label>    
+        <br />
+        <?php echo captcha_img(); ?> <br /><br />
+        <input type="text" name="captcha" placeholder="Type Security Code" class="form-control" required/>
+
+        <div class="clr"></div>
+    </div>
+    <?php endif; ?>						
+
+      <div class="row form-actions">
+        <div class="col-sm-12">
+          <button type="submit" style="width:100%;" class="btn btn-primary pull-right"><i class="icon-user-plus"></i> <?php echo e(Lang::get('core.signup')); ?>	</button>
+       </div>
+      </div>
+	  <p style="padding:10px 0" class="text-center">
+	  <a href="<?php echo e(URL::to('user/login')); ?>"> <?php echo e(Lang::get('core.signin')); ?>  </a> | <a href="<?php echo e(URL::to('')); ?>"> <?php echo e(Lang::get('core.backtosite')); ?>  </a> 
+   		</p>
+ <?php echo Form::close(); ?>
+
+ </div>
+</div> 
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.login', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

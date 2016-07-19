@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<p> Your Appointment for <?php echo e($patient->first_name); ?> <?php echo e($patient->last_name); ?> scheduled on <?php echo date('Y-m-d h:i a',strtotime($appointment)); ?> is confirmed. </p>
+
+
+<?php echo e(CNF_APPNAME); ?>
+
+</body>
+</html>

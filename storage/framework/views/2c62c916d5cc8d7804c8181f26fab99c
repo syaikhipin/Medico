@@ -1,0 +1,52 @@
+<?php $__env->startSection('content'); ?>
+<?php /**/ usort($tableGrid, "SiteHelpers::_sort") /**/ ?>
+  <div class="page-content row">
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-title">
+        <h3> <?php echo e($pageTitle); ?> <small><?php echo e($pageNote); ?></small></h3>
+      </div>
+
+      <ul class="breadcrumb">
+        <li><a href="<?php echo e(URL::to('dashboard')); ?>"> Dashboard </a></li>
+        <li class="active"><?php echo e($pageTitle); ?></li>
+      </ul>	  
+	  
+    </div>
+	
+	
+	<div class="page-content-wrapper m-t">	 
+	    <div class="toolbar-line ">
+			
+			<?php if($access['is_remove'] ==1): ?>
+			<a href="javascript://ajax"  onclick="SximoDelete();" class="tips btn btn-sm btn-danger pull-right" title="<?php echo e(Lang::get('core.btn_remove')); ?>">
+			<i class="fa fa-minus-circle "></i>&nbsp;<?php echo e(Lang::get('core.btn_remove')); ?></a>
+			<?php endif; ?> 		
+			<div class="clr clear"></div>
+			<hr />
+		 
+		</div> 	
+		 <?php echo Form::open(array('url'=>'notification/delete/', 'class'=>'form-horizontal' ,'id' =>'SximoTable' )); ?>	
+		<ul class="notification">
+		 <?php foreach($rowData as $row): ?>
+		 	<li>
+		 		<input type="checkbox" class="ids" name="id[]" value="<?php echo e($row->id); ?>" />
+		 			<i class="<?php echo $row->icon; ?>"></i> <a href="<?php echo $row->url; ?>"><?php echo $row->title; ?> </a> <span class="pull-right text-muted small"><?php echo e(date("d/m/y",strtotime($row->created))); ?> </span>
+		 		<div> <?php echo $row->note; ?></div>	
+		 	</li>
+		<?php endforeach; ?>
+		</ul>
+		 <?php echo Form::close(); ?>	
+		 <?php echo $__env->make('footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>	
+
+	  
+</div>	
+<style type="text/css">
+	
+	ul.notification { margin: 0; padding: 0; list-style: none;}
+	ul.notification li { padding:5px 0 15px 0; border-bottom: solid 1px #ddd}
+	ul.notification li div{ padding-left: 15px; }
+
+</style>		
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

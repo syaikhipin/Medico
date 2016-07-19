@@ -1,0 +1,91 @@
+ 
+
+<?php $__env->startSection('content'); ?>
+  <div class="page-content row">
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-title">
+        <h3><i class="fa fa-envelope"></i> <?php echo e(Lang::get('core.t_blastemail')); ?>  <small><?php echo e(Lang::get('core.t_blastemailsmall')); ?></small></h3>
+      </div>
+   
+      <ul class="breadcrumb">
+        <li><a href="<?php echo e(URL::to('dashboard')); ?>"><?php echo e(Lang::get('core.home')); ?></a></li>
+		<li><a href="<?php echo e(URL::to('config')); ?>"><?php echo e(Lang::get('core.t_blastemail')); ?></a></li>
+		
+      </ul>
+	  
+	  
+    </div>
+
+ <div class="page-content-wrapper">  
+	<?php if(Session::has('message')): ?>
+	  
+		   <?php echo e(Session::get('message')); ?>
+
+	   
+	<?php endif; ?>
+	<ul class="parsley-error-list">
+		<?php foreach($errors->all() as $error): ?>
+			<li><?php echo e($error); ?></li>
+		<?php endforeach; ?>
+	</ul>		
+<div class="block-content">
+	<?php echo $__env->make('sximo.config.tab', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>	
+<div class="tab-content m-t">
+	  <div class="tab-pane active use-padding" id="info">	
+	 <?php echo Form::open(array('url'=>'sximo/config/email/', 'class'=>'form-vertical row')); ?>
+
+	
+	<div class="col-sm-6 animated fadeInRight">
+		<div class="sbox  "> 
+			<div class="sbox-title"> <?php echo e(Lang::get('core.registernew')); ?>  </div>
+			<div class="sbox-content"> 	
+				  <div class="form-group">
+					<label for="ipt" class=" control-label"> <?php echo e(Lang::get('core.tab_email')); ?> </label>		
+					<textarea rows="20" name="regEmail" class="form-control input-sm  markItUp"><?php echo e($regEmail); ?></textarea>		
+				  </div>  
+				
+
+				<div class="form-group">   
+					<button class="btn btn-primary" type="submit"> <?php echo e(Lang::get('core.sb_savechanges')); ?></button>	 
+				</div>
+			
+			</div>	
+		</div>
+		
+
+
+</div> 
+
+
+	<div class="col-sm-6 animated fadeInRight">
+		<div class="sbox  "> 
+			<div class="sbox-title">  <?php echo e(Lang::get('core.forgotpassword')); ?></div>
+			<div class="sbox-content"> 	
+				  <div class="form-group">
+					<label for="ipt" class=" control-label "><?php echo e(Lang::get('core.tab_email')); ?> </label>					
+					<textarea rows="20" name="resetEmail" class="form-control input-sm markItUp"><?php echo e($resetEmail); ?></textarea>					 
+				  </div> 
+
+			  <div class="form-group">
+					<button class="btn btn-primary" type="submit"><?php echo e(Lang::get('core.sb_savechanges')); ?></button>
+				 </div> 
+			</div>	 
+	  </div>	  
+	
+ 	
+ </div>
+ <?php echo Form::close(); ?>
+
+</div>
+</div>
+</div>
+</div>
+<?php $__env->stopSection(); ?>
+
+
+
+
+
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

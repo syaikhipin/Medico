@@ -1,0 +1,161 @@
+<?php $__env->startSection('content'); ?>
+<div class="page-content row">
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-title">
+        <h3> <?php echo e($pageTitle); ?> <small><?php echo e($pageNote); ?></small></h3>
+      </div>
+      <ul class="breadcrumb">
+        <li><a href="<?php echo e(URL::to('dashboard')); ?>"><?php echo e(Lang::get('core.home')); ?></a></li>
+		<li><a href="<?php echo e(URL::to('appointment?return='.$return)); ?>"><?php echo e($pageTitle); ?></a></li>
+        <li class="active"> <?php echo e(Lang::get('core.detail')); ?> </li>
+      </ul>
+	 </div>  
+	 
+	 
+ 	<div class="page-content-wrapper">   
+	   <div class="toolbar-line">
+	   		<a href="<?php echo e(URL::to('appointment?return='.$return)); ?>" class="tips btn btn-xs btn-default" title="<?php echo e(Lang::get('core.btn_back')); ?>"><i class="fa fa-arrow-circle-left"></i>&nbsp;<?php echo e(Lang::get('core.btn_back')); ?></a>
+			<?php if($access['is_edit'] ==1): ?>
+	   		<a href="<?php echo e(URL::to('appointment/update/'.$id.'?return='.$return)); ?>" class="tips btn btn-xs btn-primary" title="<?php echo e(Lang::get('core.btn_edit')); ?>"><i class="fa fa-edit"></i>&nbsp;<?php echo e(Lang::get('core.btn_edit')); ?></a>
+			<?php endif; ?>  		   	  
+		</div>
+<div class="sbox animated fadeInRight">
+	<div class="sbox-title" style="padding: 7px 15px;"> <h4 style="float: left"> <i class="fa fa-table"></i> </h4>
+	<form method="post" action="<?php echo e(url('prescription/update')); ?>" style="float: right">
+		<input type="hidden" name="PatientID" value="<?php echo e($row->PatientID); ?>">
+		<input type="hidden" name="AppointmentID" value="<?php echo e($row->AppointmentID); ?>">
+		<button type="submit"  class="btn btn-success" name="createprescription"> Generate Prescription </button>
+	</form>
+	</div>
+	<div class="sbox-content"> 	
+
+
+	
+	<table class="table table-striped table-bordered" >
+		<tbody>	
+	
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('Doctor', (isset($fields['DoctorID']['language'])? $fields['DoctorID']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo SiteHelpers::gridDisplayView($row->DoctorID,'DoctorID','1:tb_doctor,tb_users:DoctorID:first_name|last_name',"id = tb_doctor.UserID"); ?></td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('Patient', (isset($fields['PatientID']['language'])? $fields['PatientID']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo SiteHelpers::gridDisplayView($row->PatientID,'PatientID','1:tb_patient:PatientID:first_name|last_name'); ?> </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('Clinic', (isset($fields['ClinicID']['language'])? $fields['ClinicID']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo SiteHelpers::gridDisplayView($row->ClinicID,'ClinicID','1:tb_clinic:ClinicID:Name|Address'); ?> </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('From', (isset($fields['StartAt']['language'])? $fields['StartAt']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo e(date('h:i a',strtotime($row->StartAt))); ?> </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('To', (isset($fields['EndAt']['language'])? $fields['EndAt']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo e(date('h:i a',strtotime($row->EndAt))); ?> </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('Date', (isset($fields['CreatedAt']['language'])? $fields['CreatedAt']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo e($row->CreatedAt); ?> </td>
+						
+					</tr>
+				
+					<?php /*<tr>*/ ?>
+						<?php /*<td width='30%' class='label-view text-right'>*/ ?>
+							<?php /*<?php echo e(SiteHelpers::activeLang('Type', (isset($fields['Type']['language'])? $fields['Type']['language'] : array()))); ?>	*/ ?>
+						<?php /*</td>*/ ?>
+						<?php /*<td><?php echo e($row->Type); ?> </td>*/ ?>
+						<?php /**/ ?>
+					<?php /*</tr>*/ ?>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('Diagnosis', (isset($fields['Diagnosis']['language'])? $fields['Diagnosis']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo e($row->Diagnosis); ?> </td>
+						
+					</tr>
+				
+		</tbody>	
+	</table>   
+
+	 	
+	<?php /*<?php if($subgrid['access']['is_detail'] == '1'): ?>	*/ ?>
+		<?php /*<hr />	*/ ?>
+		<?php /*<h5> Prescription </h5>*/ ?>
+	<?php /**/ ?>
+		<?php /*<div class="table-responsive">*/ ?>
+	    <?php /*<table class="table table-striped ">*/ ?>
+	        <?php /*<thead>*/ ?>
+				<?php /*<tr>*/ ?>
+					<?php /*<th class="number"> No </th>*/ ?>
+						<?php /*<?php foreach($subgrid['tableGrid'] as $t): ?>*/ ?>
+						<?php /*<?php if($t['view'] =='1'): ?>*/ ?>
+							<?php /*<th>*/ ?>
+								<?php /*<?php echo e(SiteHelpers::activeLang($t['label'],(isset($t['language'])? $t['language'] : array()))); ?>*/ ?>
+							<?php /*</th>*/ ?>
+						<?php /*<?php endif; ?>*/ ?>
+					<?php /*<?php endforeach; ?>*/ ?>
+					<?php /**/ ?>
+				  <?php /*</tr>*/ ?>
+	        <?php /*</thead>*/ ?>
+
+	        <?php /*<tbody>*/ ?>
+	            <?php /*<?php foreach($subgrid['rowData'] as $row): ?>*/ ?>
+	            <?php /*<tr>*/ ?>
+					<?php /*<td width="30">  </td>		*/ ?>
+				 <?php /*<?php foreach($subgrid['tableGrid'] as $field): ?>*/ ?>
+					 <?php /*<?php if($field['view'] =='1' ): ?>*/ ?>
+					 <?php /*<td>					 */ ?>
+					 	<?php /*<?php if($field['attribute']['image']['active'] =='1'): ?>*/ ?>
+							<?php /*<?php echo SiteHelpers::showUploadedFile($row->$field['field'],$field['attribute']['image']['path']); ?>*/ ?>
+						<?php /*<?php else: ?>	*/ ?>
+							<?php /**/ $conn = (isset($field['conn']) ? $field['conn'] : array() ) /**/ ?>
+							<?php /*<?php echo SiteHelpers::gridDisplay($row->$field['field'],$field['field'],$conn); ?>	*/ ?>
+						<?php /*<?php endif; ?>						 */ ?>
+					 <?php /*</td>*/ ?>
+					 <?php /*<?php endif; ?>					 */ ?>
+				 <?php /**/ ?>
+				 <?php /*<?php endforeach; ?>*/ ?>
+				<?php /*<?php endforeach; ?>*/ ?>
+				<?php /*</tr> */ ?>
+
+
+	        <?php /*</tbody>	*/ ?>
+
+	     <?php /*</table>   */ ?>
+	     <?php /*</div>*/ ?>
+	<?php /*<?php endif; ?>*/ ?>
+     
+	
+	</div>
+</div>	
+
+	</div>
+</div>
+	  
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

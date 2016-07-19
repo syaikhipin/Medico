@@ -1,0 +1,306 @@
+<style>
+    .helplink{
+        padding: 10px 0px;
+    }
+    .hero-image-inner::after{
+        background-color: transparent !important;
+    }
+    .hero-image-content{
+        top: 59% !important;
+    }
+    .hero-image-content h1 {
+        color: #444444;
+        font-size: 45px;
+        font-weight: 300;
+        margin: 0 0 17px;
+    }
+
+    .hero-image-content p {
+        color: #444;
+        font-size: 28px;
+        margin: 0 0 40px;
+    }
+</style>
+
+<div class="content">
+
+ <div class="mt-150">
+    <div class="hero-image">
+        <div class="hero-image-inner" style="background-size:contain; background-repeat: repeat; background-image: url('{{ asset('sximo/images/background.png')}}');">
+            <div class="hero-image-content">
+                <div class="container">
+                    <div class="row">
+                    <div class="col-md-6">
+                    @if(Session::has('message'))
+                        {!! Session::get('message') !!}
+                    @endif
+                    </div>
+                    </div>
+                    <h1>{{ CNF_APPNAME }}</h1>
+
+                    <p>{{ CNF_APPDESC }}</p>
+
+                    {{--<a href="listing-row.html" class="btn btn-primary btn-lg">View Listings</a>--}}
+                    {{--<a href="listing-submit.html" class="btn btn-secondary btn-lg">Submit</a>--}}
+                </div><!-- /.container -->
+            </div><!-- /.hero-image-content -->
+
+            <div class="hero-image-form-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4 col-sm-offset-8 col-lg-4 col-lg-offset-7 mb50">
+                            <form method="get" action="{{URL::to('result')}}">
+                                <h2>Start Searching</h2>
+
+                                {{--<div class="hero-image-keyword form-group">--}}
+                                    {{--<input type="text" class="form-control" placeholder="Keyword">--}}
+                                {{--</div><!-- /.form-group -->--}}
+
+                                <div class="hero-image-category form-group">
+                                    <select id="type" class="form-control" name="type" title="Please Select" data-width="250px"
+                                            data-live-search="false">
+                                        <option value="Clinic">Clinic</option>
+                                        <option value="Doctor">Doctor</option>
+                                    </select>
+                                </div><!-- /.form-group -->
+
+                                <div class="hero-image-location form-group">
+                                    <input id="loc" name="loc" class="form-control" type="text" placeholder="Location"
+                                           autocomplete="off">
+                                </div><!-- /.form-group -->
+
+                                <div class="hero-image-keyword form-group">
+                                    <input id="q" name="q" class="form-control ui-autocomplete-input" placeholder="Keyword"
+                                           type="text" autocomplete="off"/>
+                                    <input id="scope" type="hidden" name="scope">
+                                </div><!-- /.form-group -->
+
+                                <button type="submit" class="btn btn-primary btn-block">Search</button>
+                            </form>
+                        </div><!-- /.col-* -->
+                    </div><!-- /.row -->
+                </div><!-- /.container -->
+            </div><!-- /.hero-image-form-wrapper -->
+        </div><!-- /.hero-image-inner -->
+    </div><!-- /.hero-image -->
+
+</div>
+<div class="container">
+<div class="block background-black-light fullwidth mb-80">
+    <div class="row">
+        {{--<div class="col-sm-4">--}}
+            {{--<div class="box">--}}
+                {{--<div class="box-icon">--}}
+                    {{--<i class="fa fa-life-ring"></i>--}}
+                {{--</div><!-- /.box-icon -->--}}
+
+                {{--<div class="box-content">--}}
+                    {{--<h2>E-mail Support</h2>--}}
+                    {{--<p>We are always here to answer all your questions. Feel free to contact us.</p>--}}
+
+                    {{--<a href="#">Read More <i class="fa fa-chevron-right"></i></a>--}}
+                {{--</div><!-- /.box-content -->--}}
+            {{--</div>--}}
+        {{--</div><!-- /.col-sm-4 -->--}}
+
+        {{--<div class="col-sm-4">--}}
+            {{--<div class="box">--}}
+                {{--<div class="box-icon">--}}
+                    {{--<i class="fa fa-flask"></i>--}}
+                {{--</div><!-- /.box-icon -->--}}
+
+                {{--<div class="box-content">--}}
+                    {{--<h2>Always Improving</h2>--}}
+                    {{--<p>Our dedicated team of developers are implementing awesome features.</p>--}}
+
+                    {{--<a href="#">Read More <i class="fa fa-chevron-right"></i></a>--}}
+                {{--</div><!-- /.box-content -->--}}
+            {{--</div>--}}
+        {{--</div><!-- /.col-sm-4 -->--}}
+
+        {{--<div class="col-sm-4">--}}
+            {{--<div class="box">--}}
+                {{--<div class="box-icon">--}}
+                    {{--<i class="fa fa-thumbs-o-up"></i>--}}
+                {{--</div><!-- /.box-icon -->--}}
+
+                {{--<div class="box-content">--}}
+                    {{--<h2>Best Quality</h2>--}}
+                    {{--<p>We list only verifiend places and events to provide best content.</p>--}}
+
+                    {{--<a href="#">Read More <i class="fa fa-chevron-right"></i></a>--}}
+                {{--</div><!-- /.box-content -->--}}
+            {{--</div>--}}
+        {{--</div><!-- /.col-sm-4 -->--}}
+        <div class="col-lg-10 col-lg-offset-1 col-md-12"  >
+
+        <ul class="nav nav-tabs directlink text-center" >
+            <li class="active col-md-offset-5"><a href="#clinics" data-toggle="tab">  Clinics </a></li>
+            <li><a href="#doctors" data-toggle="tab">  Doctors </a></li>
+        </ul>
+
+        <div class="tab-content mt30">
+            <div class="tab-pane active m-t" id="clinics">
+                <div class="row">
+                        <?php
+                        $dirs = glob('sximo/images/icons/clinic/*.svg');
+                         foreach ($dirs as $dir) {
+                            echo '<div class="col-md-3 col-sm-3 col-xs-6 text-center helplink">';
+                             $title = substr(basename($dir),0,strpos(basename($dir),'.'));
+                            echo '<a href="'.url('result?scope=Speciality&type=Clinic&q='.$title.'&loc=').' "><img src="'.$dir.'" class="img" height="50px"/></a>';
+                            echo '<p class="text-center linktitle">'.strtoupper($title).'</p>';
+                            echo '</div>';
+                        }?>
+                </div>
+            </div>
+            <div class="tab-pane m-t" id="doctors">
+                <div class="row">
+                    <?php
+                    $dirs = glob('sximo/images/icons/doctor/*.svg');
+                    foreach ($dirs as $dir) {
+                        echo '<div class="col-md-3 col-sm-3 col-xs-6  text-center helplink">';
+                        $title = substr(basename($dir),0,strpos(basename($dir),'.'));
+                        echo '<a href="'.url('result?scope=Expertization&type=Doctor&q='.$title.'&loc=').' "><img src="'.$dir.'" class="img" height="50px"/></a>';
+                        echo '<p class="text-center linktitle">'.strtoupper($title).'</p>';
+                        echo '</div>';
+                    }?>
+                </div>
+            </div>
+        </div>
+            </div>
+    </div><!-- /.row -->
+
+</div><!-- /.block -->
+</div>
+</div>
+<script src="{{url('sximo/js/plugins/select2/select2.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var geocoder = new google.maps.Geocoder();;
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+        }
+//Get the latitude and the longitude;
+        function successFunction(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            codeLatLng(lat, lng)
+        }
+
+        function errorFunction(){
+
+        }
+
+        function codeLatLng(lat, lng) {
+
+            var latlng = new google.maps.LatLng(lat, lng);
+            geocoder.geocode({'latLng': latlng}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+
+                    if (results[1]) {
+                        //find country name
+                        console.log(results[2]);
+                        for (var i=0; i<results[0].address_components.length; i++) {
+                            for (var b=0;b<results[0].address_components[i].types.length;b++) {
+
+                                //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                                if (results[0].address_components[i].types[b] == "administrative_area_level_2") {
+                                    //this is the object you are looking for
+                                    city= results[0].address_components[i];
+                                    break;
+                                }
+                            }
+                        }
+                        //city data
+                        //alert(city.long_name);
+                        $.get("VerifyLocation?city="+city.long_name, function(data, status){
+                            if(status=="success"){
+                                $('#loc').val(data);
+                            }
+                        });
+
+                    }
+                }
+            });
+        }
+
+        var location = $('#loc').val();
+        var type = $('#type').val();
+        $('#type').change(function () {
+            type = $(this).val();
+
+        });
+
+
+        $("#q").on('input', function () {
+//
+            var location = $("#loc").val();
+            var val = this.value;
+//            console.log(encodeURI("/search/autocomplete?type="+ type + '&term=' + val + '&location=' + location ));
+
+            $("#q").autocomplete({
+                minLength: 2,
+                source: encodeURI("/search/autocomplete?type=" + type + '&term=' + val + '&location=' + location),
+                focus: function (event, ui) {
+                    $("#q").val(ui.item.value);
+                    return false;
+                },
+                select: function (event, ui) {
+                    $("#q").val(ui.item.value);
+                    $("#scope").val(ui.item.type);
+                    return false;
+                }
+            })
+                    .autocomplete("instance")._renderItem = function (ul, item) {
+
+
+                return $("<li>")
+                        .append("<span class='value left'>" + item.value + "</span> <span class='keyword label-inverse' style='float: right !important;'>" + item.type + "</span></a>")
+                        .appendTo(ul);
+            };
+        });
+
+        $("#loc").on('input', function () {
+            var value = this.value;
+            $("#loc").autocomplete({
+                minLength: 1,
+                source: encodeURI("/search/location?type=" + type),
+                focus: function (event, ui) {
+                    $("#loc").val(ui.item.value);
+                    return false;
+                },
+                select: function (event, ui) {
+                    $("#loc").val(ui.item.value);
+                    return false;
+                }
+            })
+                    .autocomplete("instance")._renderItem = function (ul, item) {
+                return $("<li>")
+                        .append("<span>" + item.value + "</span>")
+                        .appendTo(ul);
+            };
+        });
+
+
+
+
+        $("#q").bind('change', function () {
+
+            var v = this.value;
+            var xyz = $('#suggestion option').filter(function () {
+                return this.value == v;
+            }).data('value');
+            if (xyz != 'undefined') {
+                $('#scope').val(xyz);
+            }
+
+
+        });
+
+
+    });
+
+
+</script>

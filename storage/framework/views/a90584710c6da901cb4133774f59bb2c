@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<p> Hello , <?php echo e($data['first_name']); ?> <?php echo e($data['last_name']); ?></p>
+<p> Welcome to <?php echo e(CNF_APPNAME); ?> </p>
+
+<p> Your Email Address: <?php echo e($data['email']); ?></p>
+<p> Your Password: <?php echo e($pwd); ?></p>
+
+
+<?php echo e(CNF_APPNAME); ?>
+
+</body>
+</html>

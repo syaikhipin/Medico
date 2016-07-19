@@ -1,0 +1,55 @@
+<div class="header-wrapper background-black-light">
+    <div class="container">
+        <div class="header-inner">
+            <div class="header-logo">
+                <a href="<?php echo e(url('')); ?>">
+                    <?php if(file_exists(public_path().'/sximo/images/'.CNF_FRONT_LOGO) && CNF_FRONT_LOGO !=''): ?>
+                        <img src="<?php echo e(asset('sximo/images/'.CNF_FRONT_LOGO)); ?>" alt="<?php echo e(CNF_APPNAME); ?>" height="50px" />
+                    <?php else: ?>
+                        <img src="<?php echo e(asset('sximo/images/logo.svg')); ?>" alt="<?php echo e(CNF_APPNAME); ?>" height="50px" />
+                    <?php endif; ?>
+
+                    <span><?php echo e(CNF_APPNAME); ?></span>
+                </a>
+
+            </div><!-- /.header-logo -->
+
+
+            <div class="header-content">
+
+                <div class="header-bottom">
+                    <div class="header-action">
+                        <?php /*<a href="listing-submit.html" class="header-action-inner" title="Add Listing" data-toggle="tooltip" data-placement="bottom">*/ ?>
+                            <?php /*<i class="fa fa-plus"></i>*/ ?>
+                        <?php /*</a><!-- /.header-action-inner -->*/ ?>
+                    </div><!-- /.header-action -->
+
+                    <ul class="header-nav-primary nav nav-pills collapse navbar-collapse">
+
+                        <li >
+                            <a href="#"> Account<i class="fa fa-cogs fa-2"></i></a>
+                            <ul class="sub-menu">
+                                <?php if(!Auth::check()): ?>
+                                    <li><a href="<?php echo e(URL::to('user/login')); ?>"><span class="fa fa-sign-in"></span> <?php echo e(Lang::get('core.signin')); ?></a></li>
+                                    <li><a href="<?php echo e(URL::to('user/register')); ?>"><i class="fa fa-user"></i> <?php echo e(Lang::get('core.signup')); ?></a></li>
+                                <?php else: ?>
+                                    <li><a href="<?php echo e(URL::to('user/profile')); ?>"><span class="fa fa-user"></span> <?php echo e(Lang::get('core.m_myaccount')); ?></a></li>
+                                    <li><a href="<?php echo e(URL::to('dashboard')); ?>"><span class="fa fa-desktop"></span> <?php echo e(Lang::get('core.m_dashboard')); ?></a></li>
+                                    <li><a href="<?php echo e(URL::to('user/logout')); ?>"><span class="fa  fa-sign-out"></span> <?php echo e(Lang::get('core.m_logout')); ?></a></li>
+                                <?php endif; ?>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div><!-- /.header-bottom -->
+            </div><!-- /.header-content -->
+        </div><!-- /.header-inner -->
+    </div><!-- /.container -->
+</div><!-- /.header-wrapper -->

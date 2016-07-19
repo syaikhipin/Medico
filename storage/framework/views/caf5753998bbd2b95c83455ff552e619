@@ -1,0 +1,20 @@
+<?php
+
+$tabs = array(
+		'' 		=> Lang::get('core.tab_siteinfo'),
+		'email'			=> Lang::get('core.tab_email'),
+		'security'		=> Lang::get('core.tab_loginsecurity') ,
+
+		'log'			=> Lang::get('Clear Cache & Logs'),
+		'smtp' 			=> 'SMTP Configuration',
+		'payment'		=> 'Payment Settings'
+	);
+
+?>
+
+<ul class="nav nav-tabs" >
+<?php foreach($tabs as $key=>$val): ?>
+	<li  <?php if($key == $active): ?> class="active" <?php endif; ?>><a href="<?php echo e(URL::to('sximo/config/'.$key)); ?>"> <?php echo e($val); ?>  </a></li>
+<?php endforeach; ?>
+
+</ul>

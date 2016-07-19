@@ -1,0 +1,116 @@
+
+<?php $__env->startSection('content'); ?>
+
+    <div class="page-content row">
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="page-title">
+                  <h3><i class="fa fa-envelope-square"></i>  SMTP Configuration</h3>
+            </div>
+
+
+            <ul class="breadcrumb">
+                <li><a href="<?php echo e(URL::to('dashboard')); ?>"><?php echo e(Lang::get('core.home')); ?></a></li>
+                <li><a href="<?php echo e(URL::to('config')); ?>">SMTP Configuration</a></li>
+            </ul>
+
+        </div>
+        <div class="page-content-wrapper">
+            <?php if(Session::has('message')): ?>
+
+                <?php echo e(Session::get('message')); ?>
+
+
+            <?php endif; ?>
+            <ul class="parsley-error-list">
+                <?php foreach($errors->all() as $error): ?>
+                    <li><?php echo e($error); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <div class="block-content">
+                <?php echo $__env->make('sximo.config.tab', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                <div class="tab-content m-t">
+                    <div class="tab-pane active use-padding" id="info">
+                        <div class="sbox">
+                            <div class="sbox-title">SMTP Configuration</div>
+                            <div class="sbox-content">
+                                <?php echo Form::open(array('url'=>'sximo/config/smtp', 'class'=>'form-horizontal row')); ?>
+
+                                <div class="col-sm-6 animated fadeInRight ">
+
+                                    <div class="form-group ">
+                                        <label  class=" control-label col-md-4">System Mail Address </label>
+                                        <div class="col-md-8">
+                                            <?php echo Form::text('smtp_username',SMTP_USERNAME,['class' => 'form-control input-sm', 'required' => 'true' ,'parsley-type'=>'email' ]); ?>
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="form-group ">
+                                        <label  class=" control-label col-md-4">Password for System Mail</label>
+                                        <div class="col-md-8">
+                                            <input type="password" name="smtp_password" class="form-control input-sm">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label  class=" control-label col-md-4">Mail Driver</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="mail_driver" class="form-control input-sm" value="<?php echo e(MAIL_DRIVER); ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label  class=" control-label col-md-4"> Mail Host</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="mail_host" class="form-control input-sm" value="<?php echo e(MAIL_HOST); ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label  class=" control-label col-md-4">Mail Port</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="mail_port" class="form-control input-sm" value="<?php echo e(MAIL_PORT); ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label  class=" control-label col-md-4">Mail Encryption</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="mail_encryption" class="form-control input-sm" value="<?php echo e(MAIL_ENCRYPTION); ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-8">
+                                            <button class="btn btn-primary" type="submit"><?php echo e(Lang::get('core.sb_savechanges')); ?> </button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                                <?php echo Form::close(); ?>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+
+
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

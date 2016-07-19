@@ -1,0 +1,190 @@
+<link rel="stylesheet" href="<?php echo e(asset('sximo/js/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css')); ?>">
+
+
+<?php $__env->startSection('content'); ?>
+
+  <div class="page-content row">
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-title">
+        <h3> <?php echo e($pageTitle); ?> <small><?php echo e($pageNote); ?></small></h3>
+      </div>
+      <ul class="breadcrumb">
+        <li><a href="<?php echo e(URL::to('dashboard')); ?>"><?php echo e(Lang::get('core.home')); ?></a></li>
+		<li><a href="<?php echo e(URL::to('staff?return='.$return)); ?>"><?php echo e($pageTitle); ?></a></li>
+        <li class="active"><?php echo e(Lang::get('core.addedit')); ?> </li>
+      </ul>
+	  	  
+    </div>
+ 
+ 	<div class="page-content-wrapper">
+
+		<ul class="parsley-error-list">
+			<?php foreach($errors->all() as $error): ?>
+				<li><?php echo e($error); ?></li>
+			<?php endforeach; ?>
+		</ul>
+<div class="sbox animated fadeInRight">
+	<div class="sbox-title"> <h4> <i class="fa fa-table"></i> </h4></div>
+	<div class="sbox-content"> 	
+
+		 <?php echo Form::open(array('url'=>'staff/save?return='.$return, 'class'=>'form-horizontal','files' => true , 'parsley-validate'=>'','novalidate'=>' ')); ?>
+
+<div class="col-md-12">
+						<fieldset><legend> staff</legend>
+									
+				  <div class="form-group hidethis " style="display:none;"> 
+					<label for="StaffID" class=" control-label col-md-4 text-left"> 
+					<?php echo SiteHelpers::activeLang('StaffID', (isset($fields['StaffID']['language'])? $fields['StaffID']['language'] : array())); ?>	
+					</label>
+					<div class="col-md-6">
+					  <?php echo Form::text('StaffID', $row['StaffID'],array('class'=>'form-control', 'placeholder'=>'',   )); ?> 
+					 </div> 
+					 <div class="col-md-2">
+					 	
+					 </div>
+				  </div> 					
+				  <div class="form-group  " > 
+					<label for="Name" class=" control-label col-md-4 text-left"> 
+					<?php echo SiteHelpers::activeLang('Name', (isset($fields['Name']['language'])? $fields['Name']['language'] : array())); ?>	
+					</label>
+					<div class="col-md-6">
+					  <?php echo Form::text('Name', $row['Name'],array('class'=>'form-control', 'placeholder'=>'', 'required'=>'true'  )); ?> 
+					 </div> 
+					 <div class="col-md-2">
+					 	
+					 </div>
+				  </div> 					
+				  <div class="form-group  " > 
+					<label for="Email" class=" control-label col-md-4 text-left"> 
+					<?php echo SiteHelpers::activeLang('Email', (isset($fields['Email']['language'])? $fields['Email']['language'] : array())); ?>	
+					</label>
+					<div class="col-md-6">
+					  <?php echo Form::text('Email', $row['Email'],array('class'=>'form-control', 'placeholder'=>'', 'required'=>'true', 'parsley-type'=>'email'   )); ?> 
+					 </div> 
+					 <div class="col-md-2">
+					 	
+					 </div>
+				  </div> 					
+				  <div class="form-group  " > 
+					<label for="ContactNo" class=" control-label col-md-4 text-left">
+					<?php echo SiteHelpers::activeLang('Contact Number', (isset($fields['ContactNo']['language'])? $fields['ContactNo']['language'] : array())); ?>
+
+					</label>
+					<div class="col-md-6">
+					  <?php echo Form::text('ContactNo', $row['ContactNo'],array('class'=>'form-control', 'placeholder'=>'', 'required'=>'true', 'parsley-type'=>'number'   )); ?>
+
+					 </div> 
+					 <div class="col-md-2">
+					 	
+					 </div>
+				  </div> 					
+				  <div class="form-group  " > 
+					<label for="Clinic" class=" control-label col-md-4 text-left"> 
+					<?php echo SiteHelpers::activeLang('Clinic', (isset($fields['ClinicID']['language'])? $fields['ClinicID']['language'] : array())); ?>	
+					</label>
+					<div class="col-md-6">
+					  <select name='ClinicID' rows='5' id='ClinicID' class='select2 '   ></select> 
+					 </div> 
+					 <div class="col-md-2">
+					 	
+					 </div>
+				  </div> 					
+				  <div class="form-group  " > 
+					<label for="Duty  Start" class=" control-label col-md-4 text-left"> 
+					<?php echo SiteHelpers::activeLang('Duty  Start', (isset($fields['DutyStart']['language'])? $fields['DutyStart']['language'] : array())); ?>	
+					</label>
+					<div class="col-md-6">
+					  
+				<div class="input-group m-b" style="width:150px !important;">
+					<input type="time" name="DutyStart" id="DutyStart" value="<?php echo e($row['DutyStart']); ?>" class="form-control bootstrap-timepicker" style='width:150px !important;' >
+				</div>
+				 
+					 </div> 
+					 <div class="col-md-2">
+					 	
+					 </div>
+				  </div> 					
+				  <div class="form-group  " > 
+					<label for="Duty End" class=" control-label col-md-4 text-left"> 
+					<?php echo SiteHelpers::activeLang('Duty End', (isset($fields['DutyEnd']['language'])? $fields['DutyEnd']['language'] : array())); ?>	
+					</label>
+					<div class="col-md-6">
+					  
+				<div class="input-group m-b" style="width:150px !important;">
+					<input type="time" name="DutyEnd" id="DutyEnd" value="<?php echo e($row['DutyEnd']); ?>" class="form-control bootstrap-timepicker-component bootstrap-timepicker" style='width:150px !important;' >
+				</div>
+				 
+					 </div> 
+					 <div class="col-md-2">
+					 	
+					 </div>
+				  </div> 					
+				  <div class="form-group  " > 
+					<label for="Role" class=" control-label col-md-4 text-left"> 
+					<?php echo SiteHelpers::activeLang('Role', (isset($fields['Role']['language'])? $fields['Role']['language'] : array())); ?>	
+					</label>
+					<div class="col-md-6">
+					  
+					<?php $Role = explode(',',$row['Role']);
+					$Role_opt = array( '' => '--Select--' ,  'Nurse' => 'Nurse' , 'Compounder' =>'Compounder'); ?>
+					<select name='Role' rows='5'   class='select2 '  > 
+						<?php 
+						foreach($Role_opt as $key=>$val)
+						{
+							echo "<option  value ='$key' ".($row['Role'] == $key ? " selected='selected' " : '' ).">$val</option>"; 						
+						}						
+						?></select> 
+					 </div> 
+					 <div class="col-md-2">
+					 	
+					 </div>
+				  </div> </fieldset>
+			</div>
+			
+			
+
+		
+			<div style="clear:both"></div>	
+				
+					
+				  <div class="form-group">
+					<label class="col-sm-4 text-right">&nbsp;</label>
+					<div class="col-sm-8">	
+					<button type="submit" name="apply" class="btn btn-info btn-sm" ><i class="fa  fa-check-circle"></i> <?php echo e(Lang::get('core.sb_apply')); ?></button>
+					<button type="submit" name="submit" class="btn btn-primary btn-sm" ><i class="fa  fa-save "></i> <?php echo e(Lang::get('core.sb_save')); ?></button>
+					<button type="button" onclick="location.href='<?php echo e(URL::to('staff?return='.$return)); ?>' " class="btn btn-success btn-sm "><i class="fa  fa-arrow-circle-left "></i>  <?php echo e(Lang::get('core.sb_cancel')); ?> </button>
+					</div>	  
+			
+				  </div> 
+		 
+		 <?php echo Form::close(); ?>
+
+	</div>
+</div>		 
+</div>	
+</div>
+  <script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/bootstrap-timepicker/bootstrap-timepicker.js')); ?>"> </script>
+   <script type="text/javascript">
+	$(document).ready(function() {
+
+		$('.bootstrap-timepicker').timepicker({
+			showMeridian: false,
+			showInputs: false,
+			minuteStep: 5
+		});
+        $("#ClinicID").jCombo("<?php echo e(URL::to('staff/comboselect?filter=tb_clinic:ClinicID:Name|Address')); ?>",
+        {  selected_value : '<?php echo e($row["ClinicID"]); ?>' });
+         
+
+		$('.removeCurrentFiles').on('click',function(){
+			var removeUrl = $(this).attr('href');
+			$.get(removeUrl,function(response){});
+			$(this).parent('div').empty();	
+			return false;
+		});		
+		
+	});
+	</script>		 
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

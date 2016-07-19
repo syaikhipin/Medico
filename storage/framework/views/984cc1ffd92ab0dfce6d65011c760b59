@@ -1,0 +1,25 @@
+
+
+<?php $__env->startSection('content'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('sximo/templates/mailbox.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('sximo/templates/summernote-bs3.css')); ?>">
+<div class="page-content row">
+  <!-- Begin Header & Breadcrumb -->
+    
+
+	<!-- Begin Content -->
+	<div class="page-content-wrapper m-t">
+		<div class="resultData"></div>
+		<div class="ajaxLoading"></div>
+		<div id="<?php echo e($pageModule); ?>View"></div>			
+		<div id="<?php echo e($pageModule); ?>Grid"></div>
+	</div>	
+	<!-- End Content -->  
+</div>	
+<script>
+$(document).ready(function(){
+	reloadData('#<?php echo e($pageModule); ?>','<?php echo e($pageModule); ?>/data');	
+});	
+</script>	
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

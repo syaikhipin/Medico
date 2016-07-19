@@ -1,0 +1,37 @@
+<?php 
+define('CNF_APPNAME','Medico');
+define('CNF_APPDESC','Best place to find Clinics & Doctors');
+define('CNF_COMNAME','EYUVA');
+define('CNF_EMAIL','Info@doctorsdiary.com');
+define('CNF_METAKEY','appointment, doctor, clinic');
+define('CNF_METADESC','Write description for your site');
+define('CNF_GROUP','5');
+define('CNF_ACTIVATION','confirmation');
+define('CNF_MULTILANG','0');
+define('CNF_LANG','en');
+define('CNF_REGIST','true');
+define('CNF_FRONT','true');
+define('CNF_RECAPTCHA','false');
+define('CNF_THEME','superlist');
+define('CNF_RECAPTCHAPUBLICKEY','');
+define('CNF_RECAPTCHAPRIVATEKEY','');
+define('CNF_MODE','production');
+define('CNF_LOGO','backend-logo.png');
+define('CNF_FRONT_LOGO','logo.svg');
+define('CNF_FAVICON','favicon.svg');
+define('CNF_ALLOWIP','');
+define('CNF_RESTRICIP','192.116.134 , 194.111.606.21 ');
+define('SMTP_USERNAME','developer.eyuva@gmail.com');
+define('SMTP_PASSWORD','ntasqysektjowvgh');
+define('MAIL_DRIVER','smtp');
+define('MAIL_HOST','smtp.gmail.com');
+define('MAIL_PORT','587');
+define('MAIL_ENCRYPTION','tls');
+define('CNF_PAYMENT','both');
+define('CNF_STRIPE_API_KEY','sk_test_pHucMA8571mlFp84TpdBXOHc');
+define('CNF_STRIPE_CLIENT_ID','ca_7DQDFmx9BsrSmbs5zlEVgdP2yP34ddVo');
+define('CNF_TRIAL','5');
+define('CNF_PAYPAL_BUSINESS','sellereyuva@gmail.com');
+define('CNF_PAYPAL_MODE','sandbox');
+define('CNF_SPONSORSHIP_ALERT_DAYS','5');
+?>

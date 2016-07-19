@@ -1,0 +1,338 @@
+<?php $__env->startSection('content'); ?>
+
+
+	<div class="page-content row">
+		<!-- Page header -->
+		<div class="page-header">
+			<div class="page-title">
+				<h3> Account  <small>View Detail My Info</small></h3>
+				<?php if(Auth::user()->payment_method=='stripe'): ?>
+					<a href="/user/cancel" id="cancel" class="btn btn-danger pull-right">Cancel Subscription</a>
+				<?php endif; ?>
+			</div>
+
+			<ul class="breadcrumb">
+				<li><a href="<?php echo e(URL::to('dashboard')); ?>"><?php echo e(Lang::get('core.home')); ?></a></li>
+				<li class="active">Account</li>
+			</ul>
+		</div>
+
+		<div class="page-content-wrapper m-t">
+			<?php if(Session::has('message')): ?>
+				<?php echo Session::get('message'); ?>
+
+			<?php endif; ?>
+			<ul>
+				<?php foreach($errors->all() as $error): ?>
+					<li><?php echo e($error); ?></li>
+				<?php endforeach; ?>
+			</ul>
+			<ul class="nav nav-tabs" >
+				<li class="active"><a href="#info" data-toggle="tab"> <?php echo e(Lang::get('core.personalinfo')); ?> </a></li>
+				<li ><a href="#pass" data-toggle="tab"><?php echo e(Lang::get('core.changepassword')); ?> </a></li>
+				<?php if(\Session::get('gid')==3): ?>
+					<li ><a href="#profile" data-toggle="tab">Doctor Profile </a></li>
+					<?php if(\SiteHelpers::gridDisplayView(\Auth::user()->id,'UserID','1:tb_doctor:UserID:isSponsored')==0): ?>
+					<li ><a href="#sponsor" data-toggle="tab"> Get Sponsored in Search </a></li>
+					<?php endif; ?>
+					<?php endif; ?>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane active m-t" id="info">
+					<?php echo Form::open(array('url'=>'user/saveprofile/', 'class'=>'form-horizontal ' ,'files' => true)); ?>
+
+					<div class="form-group">
+						<label for="ipt" class=" control-label col-md-4"> Username </label>
+						<div class="col-md-8">
+							<input name="username" type="text" id="username" disabled="disabled" class="form-control input-sm" required  value="<?php echo e($info->username); ?>" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="ipt" class=" control-label col-md-4"><?php echo e(Lang::get('core.email')); ?> </label>
+						<div class="col-md-8">
+							<input name="email" type="text" id="email"  class="form-control input-sm" value="<?php echo e($info->email); ?>" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="ipt" class=" control-label col-md-4"><?php echo e(Lang::get('core.firstname')); ?> </label>
+						<div class="col-md-8">
+							<input name="first_name" type="text" id="first_name" class="form-control input-sm" required value="<?php echo e($info->first_name); ?>" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="ipt" class=" control-label col-md-4"><?php echo e(Lang::get('core.lastname')); ?> </label>
+						<div class="col-md-8">
+							<input name="last_name" type="text" id="last_name" class="form-control input-sm" required value="<?php echo e($info->last_name); ?>" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="ipt" class=" control-label col-md-4"> Contact Number</label>
+						<div class="col-md-8">
+							<input name="contactNo" type="text" id="contactNo" class="form-control input-sm"  value="<?php echo e($info->contactNo); ?>" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="ipt" class=" control-label col-md-4"> City</label>
+						<div class="col-md-8">
+							<input name="City" type="text" id="City" class="form-control input-sm"  value="<?php echo e($info->City); ?>" />
+						</div>
+					</div>
+
+					<div class="form-group  " >
+						<label for="ipt" class=" control-label col-md-4 text-right"> Avatar </label>
+						<div class="col-md-8">
+							<div class="fileinput fileinput-new" data-provides="fileinput">
+			  <span class="btn btn-primary btn-file">
+			  	<span class="fileinput-new">Upload Avatar Image</span><span class="fileinput-exists">Change</span>
+					<input type="file" name="avatar">
+				</span>
+								<span class="fileinput-filename"></span>
+								<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+							</div>
+							<br />
+							Image Dimension 80 x 80 px <br />
+							<?php echo SiteHelpers::showUploadedFile($info->avatar,'/uploads/users/'); ?>
+
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="ipt" class=" control-label col-md-4">&nbsp;</label>
+						<div class="col-md-8">
+							<button class="btn btn-success" type="submit"> <?php echo e(Lang::get('core.sb_savechanges')); ?></button>
+						</div>
+					</div>
+
+					<?php echo Form::close(); ?>
+
+				</div>
+
+				<div class="tab-pane  m-t" id="pass">
+					<?php echo Form::open(array('url'=>'user/savepassword/', 'class'=>'form-horizontal ')); ?>
+
+
+					<div class="form-group">
+						<label for="ipt" class=" control-label col-md-4"> <?php echo e(Lang::get('core.newpassword')); ?> </label>
+						<div class="col-md-8">
+							<input name="password" type="password" id="password" class="form-control input-sm" value="" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="ipt" class=" control-label col-md-4"> <?php echo e(Lang::get('core.conewpassword')); ?>  </label>
+						<div class="col-md-8">
+							<input name="password_confirmation" type="password" id="password_confirmation" class="form-control input-sm" value="" />
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label for="ipt" class=" control-label col-md-4">&nbsp;</label>
+						<div class="col-md-8">
+							<button class="btn btn-danger" type="submit"> <?php echo e(Lang::get('core.sb_savechanges')); ?> </button>
+						</div>
+					</div>
+					<?php echo Form::close(); ?>
+
+				</div>
+
+				<div class="tab-pane  m-t" id="profile">
+
+					<?php if(\Session::get('gid')=='3'): ?>
+						<?php echo Form::open(array('url'=>'user/savedoctorinfo/', 'class'=>'form-horizontal ')); ?>
+
+
+						<div class="form-group">
+							<label for="ipt" class=" control-label col-md-4"> Expertization </label>
+							<div class="col-md-8">
+								<?php echo Form::select('Expertization[]',$expertizes,$profile['Expertization'], ['id'=> 'Expertization','class'=>'select2','multiple']); ?>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="ipt" class=" control-label col-md-4"> Degree </label>
+							<div class="col-md-8">
+								<input name="Degree" type="text" id="Degree" class="form-control input-sm" value="<?php echo e($profile['Degree']); ?>" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="ipt" class=" control-label col-md-4"> Experience </label>
+							<div class="col-md-8">
+								<input name="Experience" type="text" id="Experience" class="form-control input-sm" value="<?php echo e($profile['Experience']); ?>" placeholder="1 year" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="ipt" class=" control-label col-md-4"> Fee </label>
+							<div class="col-md-8">
+								<input name="Fee" type="text" id="Fee" class="form-control input-sm" value="<?php echo e($profile['Fee']); ?>" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="ipt" class=" control-label col-md-4"> Timezone </label>
+							<div class="col-md-8">
+								<?php echo Camroncade\Timezone\Facades\Timezone::selectForm($profile['timezone'],'Select a timezone',array('class' => 'select2', 'name' => 'timezone')); ?>
+
+							</div>
+						</div>
+
+
+
+
+						<div class="form-group">
+							<label for="ipt" class=" control-label col-md-4">&nbsp;</label>
+							<div class="col-md-8">
+								<button class="btn btn-success" type="submit"> <?php echo e(Lang::get('core.sb_savechanges')); ?> </button>
+							</div>
+						</div>
+						<?php echo Form::close(); ?>
+
+						<?php /*<?php elseif(\Session::get('gid')=='5'): ?>*/ ?>
+						<?php /*<?php echo Form::open(array('url'=>'user/savepatientinfo/', 'class'=>'form-horizontal ')); ?>*/ ?>
+
+						<?php /*<div class="form-group">*/ ?>
+						<?php /*<label for="ipt" class=" control-label col-md-4"> Birthdate </label>*/ ?>
+						<?php /*<div class="col-md-4">*/ ?>
+						<?php /*<div class="input-group m-b">*/ ?>
+						<?php /*<?php echo Form::text('BirthDate', $profile['BirthDate'],array('class'=>'form-control date')); ?>*/ ?>
+						<?php /*<span class="input-group-addon"><i class="fa fa-calendar"></i></span>*/ ?>
+						<?php /*</div>*/ ?>
+						<?php /*</div>*/ ?>
+						<?php /*</div>*/ ?>
+
+						<?php /*<div class="form-group">*/ ?>
+						<?php /*<label for="ipt" class=" control-label col-md-4">Blood Group </label>*/ ?>
+						<?php /*<div class="col-md-4">*/ ?>
+						<?php
+						//$BloodGroup = explode(',',$profile['BloodGroup']);
+						//		$BloodGroup_opt = array( 'A+' => 'A+' ,  'A-' => 'A-' ,  'B+' => 'B+' ,  'B-' => 'B-' ,  'AB+' => 'AB+' ,  'AB-' => 'AB-' ,  'O+' => 'O+' ,  'O-' => 'O-' , );
+						?>
+						<?php /*<select name='BloodGroup' rows='5'   class='select2 '  >*/ ?>
+						<?php
+						//foreach($BloodGroup_opt as $key=>$val)
+						//{
+						//	echo "<option  value ='$key' ".($profile['BloodGroup'] == $key ? " selected='selected' " : '' ).">$val</option>";
+						//}
+						?>
+						<?php /*</select>*/ ?>
+						<?php /*</div>*/ ?>
+						<?php /*</div>*/ ?>
+
+						<?php /*<div class="form-group">*/ ?>
+						<?php /*<label for="ipt" class=" control-label col-md-4">Issue </label>*/ ?>
+						<?php /*<div class="col-md-6">*/ ?>
+
+						<?php /*<textarea name="LatestIssue" id="LatestIssue" value="<?php echo e($profile["LatestIssue"]); ?> " class="form-control" ></textarea>*/ ?>
+						<?php /*</div>*/ ?>
+						<?php /*</div>*/ ?>
+
+						<?php /*<div class="form-group">*/ ?>
+						<?php /*<label for="ipt" class=" control-label col-md-4">&nbsp;</label>*/ ?>
+						<?php /*<div class="col-md-8">*/ ?>
+						<?php /*<button class="btn btn-success " type="submit"> <?php echo e(Lang::get('core.sb_savechanges')); ?> </button>*/ ?>
+						<?php /*</div>*/ ?>
+						<?php /*</div>*/ ?>
+						<?php /*<?php echo Form::close(); ?>*/ ?>
+					<?php endif; ?>
+				</div>
+				<?php if(\Auth::user()->group_id == 3 ): ?>
+					<div class="tab-pane  m-t" id="sponsor">
+
+						<?php echo Form::open(array('url'=> url('doctor/sponsor/'.\SiteHelpers::gridDisplayView(\Auth::user()->id,'UserID','1:tb_doctor:UserID:DoctorID')), 'class'=>'form-horizontal','method' =>'post')); ?>
+
+						<div class="payment-errors alert alert-danger" style="display: none;"></div>
+						<input type="hidden" value="<?php echo e(\Auth::user()->id); ?>" name="userid">
+						<div class="form-group">
+							<label for="ipt" class=" control-label col-md-4"> Plan </label>
+							<div class="col-md-8">
+								<select name="plan" class="select2">
+									<option value="">--Select--</option>
+									<?php foreach($plans as $plan): ?>
+									<option value="<?php echo e($plan->id); ?>"><?php echo e($plan->amount); ?>$ per <?php echo e($plan->duration); ?> Month</option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="ipt" class=" control-label col-md-4"> Choose Card </label>
+							<div class="col-md-8">
+								<select name="card" class="select2">
+									<option value="">--Select--</option>
+									<?php foreach($cards as $card): ?>
+									<option value="<?php echo e($card->id); ?>"><?php echo e($card->last4); ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						</div>
+
+
+
+
+						<div class="form-group">
+							<div class="col-md-4"></div>
+							<div class="col-md-8">
+								<a href="<?php echo e(url('cards/update?continue=user/profile')); ?>">Add Card</a>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label for="ipt" class=" control-label col-md-4">&nbsp;</label>
+							<div class="col-md-8">
+								<button class="btn btn-success" type="submit"> Confirm </button>
+							</div>
+						</div>
+						<?php echo Form::close(); ?>
+
+
+
+
+					</div>
+			</div>
+			<?php endif; ?>
+
+
+
+		</div>
+	</div>
+
+	</div>
+
+	<script>
+		$(document).ready(function(){
+			$('a#cancel').click(function(event){
+				$.ajax({url:this.href, success: function(result){
+					if(result=='false'){
+						notyMessageError("There are some error.");
+					}
+					else{
+						notyMessage("Subscription cancelled successfully");
+					}
+
+				}});
+				event.preventDefault();
+			})
+
+			$('#Expertization').select2({
+						width :'98%',
+						tags: true,
+					}
+			);
+		});
+
+
+
+	</script>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

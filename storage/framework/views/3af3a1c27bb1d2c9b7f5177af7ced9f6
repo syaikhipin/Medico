@@ -1,0 +1,154 @@
+<?php $__env->startSection('content'); ?>
+<div class="page-content row">
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-title">
+        <h3> <?php echo e($pageTitle); ?> <small><?php echo e($pageNote); ?></small></h3>
+      </div>
+      <ul class="breadcrumb">
+        <li><a href="<?php echo e(URL::to('dashboard')); ?>"><?php echo e(Lang::get('core.home')); ?></a></li>
+		<li><a href="<?php echo e(URL::to('clinic?return='.$return)); ?>"><?php echo e($pageTitle); ?></a></li>
+        <li class="active"> <?php echo e(Lang::get('core.detail')); ?> </li>
+      </ul>
+	 </div>  
+	 
+	 
+ 	<div class="page-content-wrapper">   
+	   <div class="toolbar-line">
+	   		<a href="<?php echo e(URL::to('clinic?return='.$return)); ?>" class="tips btn btn-xs btn-default" title="<?php echo e(Lang::get('core.btn_back')); ?>"><i class="fa fa-arrow-circle-left"></i>&nbsp;<?php echo e(Lang::get('core.btn_back')); ?></a>
+			<?php if($access['is_add'] ==1): ?>
+	   		<a href="<?php echo e(URL::to('clinic/update/'.$id.'?return='.$return)); ?>" class="tips btn btn-xs btn-primary" title="<?php echo e(Lang::get('core.btn_edit')); ?>"><i class="fa fa-edit"></i>&nbsp;<?php echo e(Lang::get('core.btn_edit')); ?></a>
+			<?php endif; ?>  		   	  
+		</div>
+<div class="sbox animated fadeInRight">
+	<div class="sbox-title"> <h4> <i class="fa fa-table"></i> </h4></div>
+	<div class="sbox-content"> 	
+
+
+	
+	<table class="table table-striped table-bordered" >
+		<tbody>
+
+		<tr>
+			<td colspan="2" style="text-align: center"> <?php echo SiteHelpers::showUploadedFile($row->Photo,'/uploads/clinics/',100,'square'); ?> </td>
+		</tr>
+	
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('Name', (isset($fields['Name']['language'])? $fields['Name']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo e($row->Name); ?> </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('Speciality', (isset($fields['Speciality']['language'])? $fields['Speciality']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo e($row->Speciality); ?> </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('Description', (isset($fields['Description']['language'])? $fields['Description']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo e($row->Description); ?> </td>
+						
+					</tr>
+				
+
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('Address', (isset($fields['Address']['language'])? $fields['Address']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo e($row->Address); ?> </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>
+							<?php echo e(SiteHelpers::activeLang('City', (isset($fields['City']['language'])? $fields['City']['language'] : array()))); ?>	
+						</td>
+						<td><?php echo e($row->City); ?> </td>
+						
+					</tr>
+
+				
+		</tbody>	
+	</table>
+
+	<hr/>
+	<h5>Gallary</h5>
+		<div>
+			<?php
+
+			$row->Gallary = $row->Gallary!="" ? explode(",",$row->Gallary) : array()?>
+			<?php if(empty($row->Gallary)): ?>
+				No Photos
+			<?php endif; ?>
+			<?php foreach($row->Gallary as $photo): ?>
+				<?php echo \SiteHelpers::showUploadedFile($photo,'/uploads/clinics/gallery/',100,'square'); ?>
+
+			<?php endforeach; ?>
+		</div>
+
+
+	 	
+	<?php /*<?php if($subgrid['access']['is_detail'] == '1'): ?>	*/ ?>
+		<?php /*<hr />	*/ ?>
+		<?php /*<h5> Staff </h5>*/ ?>
+	<?php /**/ ?>
+		<?php /*<div class="table-responsive">*/ ?>
+	    <?php /*<table class="table table-striped ">*/ ?>
+	        <?php /*<thead>*/ ?>
+				<?php /*<tr>*/ ?>
+					<?php /*<th class="number"> No </th>*/ ?>
+						<?php /*<?php foreach($subgrid['tableGrid'] as $t): ?>*/ ?>
+						<?php /*<?php if($t['view'] =='1'): ?>*/ ?>
+							<?php /*<th>*/ ?>
+								<?php /*<?php echo e(SiteHelpers::activeLang($t['label'],(isset($t['language'])? $t['language'] : array()))); ?>*/ ?>
+							<?php /*</th>*/ ?>
+						<?php /*<?php endif; ?>*/ ?>
+					<?php /*<?php endforeach; ?>*/ ?>
+					<?php /**/ ?>
+				  <?php /*</tr>*/ ?>
+	        <?php /*</thead>*/ ?>
+
+	        <?php /*<tbody>*/ ?>
+	            <?php /*<?php foreach($subgrid['rowData'] as $row): ?>*/ ?>
+	            <?php /*<tr>*/ ?>
+					<?php /*<td width="30">  </td>		*/ ?>
+				 <?php /*<?php foreach($subgrid['tableGrid'] as $field): ?>*/ ?>
+					 <?php /*<?php if($field['view'] =='1' ): ?>*/ ?>
+					 <?php /*<td>					 */ ?>
+					 	<?php /*<?php if($field['attribute']['image']['active'] =='1'): ?>*/ ?>
+							<?php /*<?php echo SiteHelpers::showUploadedFile($row->$field['field'],$field['attribute']['image']['path']); ?>*/ ?>
+						<?php /*<?php else: ?>	*/ ?>
+							<?php /**/ $conn = (isset($field['conn']) ? $field['conn'] : array() ) /**/ ?>
+							<?php /*<?php echo SiteHelpers::gridDisplay($row->$field['field'],$field['field'],$conn); ?>	*/ ?>
+						<?php /*<?php endif; ?>						 */ ?>
+					 <?php /*</td>*/ ?>
+					 <?php /*<?php endif; ?>					 */ ?>
+				 <?php /**/ ?>
+				 <?php /*<?php endforeach; ?>*/ ?>
+				<?php /*<?php endforeach; ?>*/ ?>
+				<?php /*</tr> */ ?>
+
+
+	        <?php /*</tbody>	*/ ?>
+
+	     <?php /*</table>   */ ?>
+	     <?php /*</div>*/ ?>
+	<?php /*<?php endif; ?>*/ ?>
+     <?php /**/ ?>
+	
+	</div>
+</div>	
+
+	</div>
+</div>
+	  
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<h2>Hello <?php echo e($firstname); ?> , </h2>
+		<p> Thank your for joining with our site </p>
+		<p> Bellow is your account Info </p>
+		<p>
+			Email : <?php echo e($email); ?> <br />
+			Password : <?php echo e($password); ?><br />
+		</p>
+		<p> Please follow link activation  <a href="<?php echo e(URL::to('user/activation?code='.$code)); ?>"> Active my account now</a></p>
+		<p> If the link now working , copy and paste link bellow </p>
+		<p> <?php echo e(URL::to('user/activation?code='.$code)); ?> </p> 
+		<br /><br /><p> Thank You </p><br /><br />
+		
+		<?php echo e(CNF_APPNAME); ?> 
+	</body>
+</html>

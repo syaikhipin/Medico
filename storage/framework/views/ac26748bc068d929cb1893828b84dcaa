@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> <?php echo e(CNF_APPNAME); ?> </title>
+<meta name="keywords" content="">
+<meta name="description" content=""/>
+<link rel="shortcut icon" href="<?php echo e(asset('sximo/images/'.CNF_FAVICON)); ?>" type="image/x-icon">
+
+
+
+		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+		<link href="<?php echo e(asset('sximo/js/plugins/bootstrap/css/bootstrap.css')); ?>" rel="stylesheet"> 
+		<link href="<?php echo e(asset('sximo/js/plugins/jasny-bootstrap/css/jasny-bootstrap.min.css')); ?>" rel="stylesheet">
+		<link href="<?php echo e(asset('sximo/fonts/awesome/css/font-awesome.min.css')); ?>" rel="stylesheet">
+		<link href="<?php echo e(asset('sximo/js/plugins/bootstrap.summernote/summernote.css')); ?>" rel="stylesheet">
+		<link href="<?php echo e(asset('sximo/js/plugins/datepicker/css/bootstrap-datetimepicker.min.css')); ?>" rel="stylesheet">
+		<link href="<?php echo e(asset('sximo/js/plugins/bootstrap.datetimepicker/css/bootstrap-datetimepicker.min.css')); ?>" rel="stylesheet">
+			<link href="<?php echo e(asset('sximo/js/plugins/select2/new/select2.css')); ?>" rel="stylesheet">
+<?php /*		<link href="<?php echo e(asset('sximo/js/plugins/select2/select2.css')); ?>" rel="stylesheet">*/ ?>
+
+		<link href="<?php echo e(asset('sximo/js/plugins/iCheck/skins/square/green.css')); ?>" rel="stylesheet">
+		<link href="<?php echo e(asset('sximo/js/plugins/fancybox/jquery.fancybox.css')); ?>" rel="stylesheet">
+			
+		<?php /*<link href="<?php echo e(asset('sximo/css/animate.css')); ?>" rel="stylesheet">		*/ ?>
+		<link href="<?php echo e(asset('sximo/css/icons.min.css')); ?>" rel="stylesheet">
+		<link href="<?php echo e(asset('sximo/js/plugins/toastr/toastr.css')); ?>" rel="stylesheet">
+		<?php if(!Session::get('themes') or Session::get('themes') ==''): ?>
+		<link href="<?php echo e(asset('sximo/css/sximo.css')); ?>" rel="stylesheet">	
+		<?php else: ?>
+		<link href="<?php echo e(asset('sximo/css/'.Session::get('themes').'.css')); ?>" rel="stylesheet">	
+		<?php endif; ?>
+
+
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/jquery.min.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/jquery.cookie.js')); ?>"></script>			
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/jquery-ui.min.js')); ?>"></script>				
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/iCheck/icheck.min.js')); ?>"></script>
+<?php /*		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/select2/select2.min.js')); ?>"></script>*/ ?>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/select2/new/select2.min.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/fancybox/jquery.fancybox.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/prettify.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/parsley.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/datepicker/js/bootstrap-datetimepicker.min.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/switch.min.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/bootstrap.datetimepicker/js/bootstrap-datetimepicker.min.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/bootstrap/js/bootstrap.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/jasny-bootstrap/js/jasny-bootstrap.min.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/sximo.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/jquery.form.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/jquery.jCombo.min.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/toastr/toastr.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/bootstrap.summernote/summernote.min.js')); ?>"></script>
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/simpleclone.js')); ?>"></script>	
+		
+
+		<!-- AJax -->
+		<link href="<?php echo e(asset('sximo/js/plugins/ajax/ajaxSximo.css')); ?>" rel="stylesheet"> 
+		<script type="text/javascript" src="<?php echo e(asset('sximo/js/plugins/ajax/ajaxSximo.js')); ?>"></script>
+
+		<!-- End Ajax -->
+		
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	<style>
+		input[class='aptime']{
+			display: none !important;
+		}
+		label.slot{
+			cursor: pointer;
+			padding: 2px 4px;
+			border-radius: 10px;
+			color:#7fac5a;
+		}
+		label.slot:hover{
+			background-color: #7fac5a;
+			color: white;
+		}
+		label.slot.disabled{
+			background:0;
+			text-decoration: line-through;
+			color: #818181;
+			opacity: 0.4;
+			cursor: default;
+		}
+
+	</style>
+
+	
+  	</head>
+  	<body class="sxim-init" >
+	<div id="wrapper">
+		<?php echo $__env->make('layouts/sidemenu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<div class="gray-bg " id="page-wrapper">
+			<?php echo $__env->make('layouts/headmenu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+			<?php echo $__env->yieldContent('content'); ?>		
+		</div>
+
+		<div class="footer fixed">
+		    <div class="pull-right">
+				<?php if(\Auth::user()->group_id==3 && \Auth::user()->payment_method=='0'): ?>
+					<strong>Your Trial Period ends on <span class="text-danger"> <?php echo e(date('Y-M-d', strtotime('+'.CNF_TRIAL.' day',strtotime(\Auth::user()->created_at)))); ?></span>. For continuation   <a href="<?php echo e(url('user/subscribe')); ?>">Subscribe</a> </strong>
+				<?php endif; ?>
+		    </div>
+		    <div>
+				&copy; All rights reserved for <?php echo e(CNF_APPNAME); ?> by <?php echo e(CNF_COMNAME); ?> | Powered by <a href="http://eyuva.com">EYUVA Technologies</a>
+		    </div>
+
+		</div>		
+
+	</div>
+
+<div class="modal fade" id="sximo-modal" tabindex="-1" role="dialog">
+<div class="modal-dialog">
+  <div class="modal-content">
+	<div class="modal-header bg-default">
+		
+		<button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">Modal title</h4>
+	</div>
+	<div class="modal-body" id="sximo-modal-content">
+
+	</div>
+
+  </div>
+</div>
+</div>
+
+<?php /*<div class="theme-config">*/ ?>
+    <?php /*<div class="theme-config-box">*/ ?>
+        <?php /*<div class="spin-icon">*/ ?>
+            <?php /*<i class="fa fa-cogs fa-spin"></i>*/ ?>
+        <?php /*</div>*/ ?>
+        <?php /*<div class="skin-setttings">*/ ?>
+            <?php /*<div class="title">Select Color Schema</div>*/ ?>
+            <?php /*<div class="setings-item">*/ ?>
+                    <?php /*<ul>*/ ?>
+	                    <?php /*<li><a href="<?php echo e(url('home/skin/sximo')); ?>"> Default Skin  <span class="pull-right default-skin"> </span></a></li> */ ?>
+	                    <?php /*<li><a href="<?php echo e(url('home/skin/sximo-dark-blue')); ?>"> Dark Blue Skin <span class="pull-right dark-blue-skin"> </span> </a></li> */ ?>
+	                    <?php /*<li><a href="<?php echo e(url('home/skin/sximo-light-blue')); ?>"> Light Blue Skin <span class="pull-right light-blue-skin"> </span> </a></li> */ ?>
+	                   <?php /**/ ?>
+                    <?php /*</ul>*/ ?>
+
+                <?php /**/ ?>
+            <?php /*</div>*/ ?>
+            <?php /**/ ?>
+        <?php /*</div>*/ ?>
+    <?php /*</div>*/ ?>
+<?php /*</div>*/ ?>
+
+<?php echo e(Sitehelpers::showNotification()); ?> 
+<script type="text/javascript">
+jQuery(document).ready(function ($) {
+
+    $('#sidemenu').sximMenu();
+	$('.spin-icon').click(function () {
+        $(".theme-config-box").toggleClass("show");
+    });
+
+	setInterval(function(){ 
+		var noteurl = $('.notif-value').attr('code'); 
+		$.get( noteurl +'/notification/load',function(data){
+			$('.notif-alert').html(data.total);
+			var html = '';
+			$.each( data.note, function( key, val ) {
+				html += '<li><a href="'+val.url+'"> <div> <i class="'+val.icon+' fa-fw"></i> '+ val.title+'  <span class="pull-right text-muted small">'+val.date+'</span></div></li>';
+				html += '<li class="divider"></li>';			 
+			});
+			html += '<li><div class="text-center link-block"><a href="'+noteurl+'/notification"><strong>View All Notification</strong> <i class="fa fa-angle-right"></i></a></div></li>';
+			$('.notif-value').html(html);
+		});
+	}, 3000);
+
+	$('.count-info').click(function(){
+		$.ajax({url:'/dashboard/read', success: function(result){
+		}});
+	});
+
+
+});	
+	
+	
+</script>
+</body> 
+</html>
